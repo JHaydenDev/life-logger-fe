@@ -56,7 +56,7 @@ const MoonOrSun = styled.div`
   ${({ isDark, theme: t }) => `
     border: ${isDark ? `4px` : `2px`} solid
     ${t.colors.text};
-  background: ${t.colors.text};
+  background: ${isDark ? `${t.colors.text}` : `${t.colors.background}`};
   border-radius: 50%;
   height: 24px;
   overflow: ${isDark ? `visible` : `hidden`};
@@ -67,6 +67,9 @@ const MoonOrSun = styled.div`
   &::before {
     border-radius: 50%;
     border: 2px solid ${t.colors.text};
+    border: ${
+      isDark ? `2px solid ${t.colors.text}` : `2px solid ${t.colors.background}`
+    };
     content: '';
     height: 24px;
     opacity: ${isDark ? 0 : 1};
@@ -79,14 +82,25 @@ const MoonOrSun = styled.div`
   }
   &::after {
     border-radius: 50%;
-    box-shadow: 0 -23px 0 ${t.colors.text},
+    box-shadow: ${
+      isDark
+        ? `0 -23px 0 ${t.colors.text},
       0 23px 0 ${t.colors.text},
       23px 0 0 ${t.colors.text},
       -23px 0 0 ${t.colors.text},
       15px 15px 0 ${t.colors.text},
       -15px 15px 0 ${t.colors.text},
       15px -15px 0 ${t.colors.text},
-      -15px -15px 0 ${t.colors.text};
+      -15px -15px 0 ${t.colors.text}`
+        : `0 -23px 0 ${t.colors.background},
+      0 23px 0 ${t.colors.background},
+      23px 0 0 ${t.colors.background},
+      -23px 0 0 ${t.colors.background},
+      15px 15px 0 ${t.colors.background},
+      -15px 15px 0 ${t.colors.background},
+      15px -15px 0 ${t.colors.background},
+      -15px -15px 0 ${t.colors.background}`
+    };
     content: '';
     height: 8px;
     left: 50%;
@@ -104,10 +118,12 @@ const MoonOrSun = styled.div`
     `}
 `;
 
+// background: ${t.colors.primary};
+
 // background color must match background color of header
 const MoonMask = styled.div`
   ${({ isDark, theme: t }) => `
-  background: ${t.colors.primary};
+  background: ${isDark ? `${t.colors.background}` : `${t.colors.secondary}`};
   border-radius: 50%;
   border: 0;
   height: 24px;
